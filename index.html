@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Knova | Student Skill Exchange · LPU</title>
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#07090E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+    <style>
+        :root {
+            --bg: #07090E;
+            --surface: #0E131F;
+            --surface-card: rgba(18, 24, 38, 0.65);
+            --fg: #F1F5F9;
+            --mut: #94A3B8;
+            --mut-dark: #64748B;
+            --ln: rgba(255, 255, 255, 0.08);
+            --ln-hover: rgba(56, 189, 248, 0.28);
+            --cyan: #38BDF8;
+            --mint: #34D399;
+            --acc: linear-gradient(135deg, #38BDF8, #34D399);
+            --acc-glow: rgba(56, 189, 248, 0.2);
+            color-scheme: dark;
+            box-sizing: border-box;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-padding-top: 88px;
+            scroll-behavior: smooth;
+            background: var(--bg);
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(1100px 600px at 50% -5%, rgba(56, 189, 248, 0.12), transparent 70%),
+                radial-gradient(900px 500px at 85% 15%, rgba(52, 211, 153, 0.08), transparent 60%),
+                radial-gradient(800px 500px at 15% 35%, rgba(56, 189, 248, 0.05), transparent 60%);
+            background-attachment: fixed;
+            color: var(--fg);
+            font: 400 15px/1.6 "Inter", system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+            letter-spacing: -0.03em;
+            color: #FFFFFF;
+        }
+
+        /* ========== CENTERED & BALANCED NAVBAR ========== */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(7, 9, 14, 0.75);
+            backdrop-filter: blur(20px) saturate(1.5);
+            -webkit-backdrop-filter: blur(20px) saturate(1.5);
+            border-bottom: 1px solid var(--ln);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            padding: 12px 32px;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.28rem;
+            cursor: pointer;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            user-select: none;
+        }
+
+        .logo b {
+            background: var(--acc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .links-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .links {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--ln);
+            padding: 4px 6px;
+            border-radius: 999px;
+            max-width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .links button {
+            background: none;
+            border: 0;
+            color: var(--mut);
+            font: 500 0.85rem "Inter", sans-serif;
+            padding: 6px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .links button:hover {
+            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .links button.on {
+            color: #FFFFFF;
+            background: rgba(56, 189, 248, 0.14);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            font-weight: 600;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .pts {
+            background: rgba(56, 189, 248, 0.08);
+            color: #E2E8F0;
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-weight: 600;
+            font-size: 0.82rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .pts:hover {
+            border-color: rgba(56, 189, 248, 0.45);
+            background: rgba(56, 189, 248, 0.14);
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+        }
+
+        .pts span {
+            color: var(--cyan);
+            font-weight: 700;
+        }
+
+        /* ========== BUTTON SYSTEM ========== */
+        .btn {
+            font: 600 0.88rem "Inter", sans-serif;
+            border-radius: 999px;
+            padding: 9px 20px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn.p {
+            background: var(--acc);
+            color: #050B14;
+            box-shadow: 0 4px 18px rgba(56, 189, 248, 0.25);
+        }
+
+        .btn.p:hover {
+            filter: brightness(1.1);
+            box-shadow: 0 6px 24px rgba(52, 211, 153, 0.35);
+        }
+
+        .btn.s {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--ln);
+            color: #E2E8F0;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn.s:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.22);
+            color: #FFFFFF;
+        }
+
+        .btn.o {
+            background: transparent;
+            border-color: var(--ln);
+            color: var(--mut);
+        }
+
+        .btn.o:hover {
+            color: #FFFFFF;
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .btn.w {
+            width: 100%;
+            border-radius: 12px;
+            padding: 11px 18px;
+        }
+
+        /* ========== MAIN CONTAINER ========== */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 120px;
+        }
+
+        .pg {
+            display: none;
+        }
+
+        .pg.on {
+            display: block;
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            position: relative;
+            border: 1px solid var(--ln);
+            border-radius: 28px;
+            padding: 64px 54px;
+            background: linear-gradient(175deg, rgba(14, 20, 32, 0.75) 0%, rgba(7, 9, 14, 0.85) 100%);
+            backdrop-filter: blur(20px);
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 48px;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -120px;
+            right: -80px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.2), transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -100px;
+            left: -50px;
+            width: 440px;
+            height: 440px;
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.15), transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(56, 189, 248, 0.08);
+            color: var(--cyan);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 999px;
+            padding: 5px 14px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: -0.035em;
+        }
+
+        /* Fixed High-Contrast Word */
+        .hero h1 em {
+            font-style: normal;
+            background: var(--acc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            filter: drop-shadow(0 2px 14px rgba(56, 189, 248, 0.35));
+        }
+
+        .hero p {
+            max-width: 500px;
+            margin: 20px 0 32px;
+            color: #94A3B8;
+            font-size: 1.05rem;
+            line-height: 1.65;
+        }
+
+        .hero .row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* ========== HERO LIVE PREVIEW CARD (RIGHT) ========== */
+        .match-window {
+            background: rgba(11, 16, 26, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            position: relative;
+            backdrop-filter: blur(14px);
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--ln);
+            padding-bottom: 14px;
+            margin-bottom: 16px;
+        }
+
+        .match-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--mut);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--mint);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--mint);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .match-badge {
+            font-size: 0.75rem;
+            background: rgba(52, 211, 153, 0.12);
+            color: #6EE7B7;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .chat-stream {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .chat-bubble {
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            position: relative;
+            animation: fadeIn 0.4s both;
+        }
+
+        .chat-bubble small {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 3px;
+        }
+
+        .chat-bubble.user {
+            align-self: flex-end;
+            max-width: 85%;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #F1F5F9;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-bubble.user small {
+            color: var(--cyan);
+        }
+
+        .chat-bubble.ai {
+            align-self: flex-start;
+            max-width: 90%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--ln);
+            color: #E2E8F0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-bubble.ai small {
+            color: var(--mint);
+        }
+
+        .chat-bubble.calendar {
+            background: linear-gradient(135deg, rgba(52, 211, 153, 0.1), rgba(56, 189, 248, 0.05));
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            padding: 12px 16px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #F1F5F9;
+        }
+
+        .cal-icon {
+            font-size: 1.15rem;
+            background: rgba(52, 211, 153, 0.16);
+            border-radius: 8px;
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            color: var(--mint);
+        }
+
+        /* ========== TICKER / MARQUEE ========== */
+        .tick {
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 1px solid var(--ln);
+            border-bottom: 1px solid var(--ln);
+            margin: 40px 0;
+            color: #94A3B8;
+            font-size: 0.85rem;
+            font-weight: 500;
+            -webkit-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+            mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+        }
+
+        .tick div {
+            display: inline-block;
+            padding: 14px 0;
+            animation: mq 42s linear infinite;
+        }
+
+        .tick span {
+            color: var(--cyan);
+            margin: 0 10px;
+        }
+
+        @keyframes mq {
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ========== UI CARDS & SECTIONS ========== */
+        h2.t {
+            font-size: 1.7rem;
+            margin-bottom: 6px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2.t::before {
+            content: "";
+            width: 4px;
+            height: 1.1em;
+            border-radius: 4px;
+            background: var(--acc);
+        }
+
+        .sub {
+            color: var(--mut);
+            margin-bottom: 24px;
+            max-width: 620px;
+            font-size: 0.95rem;
+        }
+
+        .sec {
+            margin-top: 64px;
+        }
+
+        .card {
+            background: var(--surface-card);
+            border: 1px solid var(--ln);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(12px);
+            transition: all 0.22s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.16);
+            background: rgba(24, 32, 48, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+        }
+
+        .g {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .mb {
+            margin-bottom: 22px;
+        }
+
+        .chip {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: #BAE6FD;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 999px;
+            padding: 3px 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin: 2px 4px 2px 0;
+        }
+
+        .dc {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(52, 211, 153, 0.06));
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        .av {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 14px;
+            font-size: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Inputs & Form Elements */
+        input, select, textarea {
+            width: 100%;
+            font: inherit;
+            color: var(--fg);
+            background: rgba(14, 19, 31, 0.8);
+            border: 1px solid var(--ln);
+            border-radius: 12px;
+            padding: 11px 14px;
+            outline: 0;
+            transition: 0.18s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+            background: rgba(18, 25, 40, 0.95);
+        }
+
+        .fg {
+            margin-bottom: 16px;
+        }
+
+        .fg label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--mut);
+            margin-bottom: 7px;
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ========== BOTTOM DOCKED HELP DESK BUTTON (FAB) ========== */
+        .fab {
+            position: fixed;
+            right: 24px;
+            bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: rgba(14, 20, 32, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: #FFFFFF;
+            border-radius: 999px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.15);
+            backdrop-filter: blur(16px);
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fab:hover {
+            transform: translateY(-2px);
+            border-color: var(--cyan);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 26px rgba(56, 189, 248, 0.3);
+            background: rgba(18, 26, 42, 0.95);
+        }
+
+        .fab svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--cyan);
+        }
+
+        /* Modal Overlay & Dialogs */
+        .ov {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 7, 12, 0.75);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            padding: 18px;
+        }
+
+        .ov.on {
+            display: flex;
+        }
+
+        .md {
+            background: #0D121D;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            width: 100%;
+            max-width: 480px;
+            max-height: 90vh;
+            overflow: auto;
+            animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .x {
+            float: right;
+            background: none;
+            border: 0;
+            color: var(--mut);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .x:hover {
+            color: #FFFFFF;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            padding: 4px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 999px;
+        }
+
+        .tabs .btn {
+            flex: 1;
+            border: 0;
+            background: transparent;
+            color: var(--mut);
+        }
+
+        .tabs .btn:not(.o) {
+            background: var(--acc);
+            color: #050B14;
+        }
+
+        #toasts {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 300;
+            display: grid;
+            gap: 10px;
+        }
+
+        .ts {
+            background: #111726;
+            color: var(--fg);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 12px 18px;
+            border-radius: 14px;
+            font-weight: 500;
+            font-size: 0.88rem;
+            animation: fadeIn 0.3s;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+        }
+
+        .ans {
+            border-left: 2px solid var(--cyan);
+            padding: 10px 14px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 0 10px 10px 0;
+        }
+
+        details {
+            border: 1px solid var(--ln);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            background: var(--surface-card);
+        }
+
+        summary {
+            font-weight: 600;
+            cursor: pointer;
+            color: #E2E8F0;
+        }
+
+        footer {
+            border-top: 1px solid var(--ln);
+            color: var(--mut-dark);
+            padding: 32px 24px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media(max-width: 900px) {
+            nav {
+                grid-template-columns: 1fr auto;
+                padding: 12px 20px;
+            }
+
+            .links-wrap {
+                order: 3;
+                grid-column: span 2;
+                justify-content: flex-start;
+                padding-top: 6px;
+            }
+
+            .links {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 44px 28px;
+                gap: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- CENTERED EVENLY SPACED NAVBAR -->
+    <nav>
+        <div class="logo" onclick="go('home')">Kno<b>va</b></div>
+        
+        <div class="links-wrap">
+            <div class="links" id="links"></div>
+        </div>
+
+        <div class="nav-actions">
+            <div class="pts" onclick="go('dashboard')">
+                <span id="np">0</span> pts
+            </div>
+            <button class="btn p" id="ab" onclick="authBtn()">Sign In</button>
+        </div>
+    </nav>
+
+    <div id="toasts"></div>
+
+    <main>
+        <!-- HOME SECTION -->
+        <section class="pg on" id="p-home">
+            <div class="hero">
+                <div>
+                    <span class="hero-chip">AI-POWERED CAMPUS MARKETPLACE</span>
+                    <h1>Let’s <em id="rot">Barter</em> together at LPU</h1>
+                    <p>Cashless skill barter, verified peer tutors, hackathon teams, and an academic mentor, all powered by Knowledge Points.</p>
+                    
+                    <!-- Clean 2-CTA Hierarchy -->
+                    <div class="row">
+                        <button class="btn p" onclick="go('tutors')">Browse mentors</button>
+                        <button class="btn s" onclick="go('barter')">Start a barter</button>
+                    </div>
+                </div>
+
+                <!-- Right Live Preview Card -->
+                <div class="match-window" aria-hidden="true">
+                    <div class="match-header">
+                        <div class="match-status">
+                            <span class="status-dot"></span>
+                            Live Match Preview
+                        </div>
+                        <span class="match-badge">✨ 98% Match</span>
+                    </div>
+
+                    <div class="chat-stream">
+                        <div class="chat-bubble user">
+                            <small>You</small>
+                            I can teach Figma. Who can help me with C++?
+                        </div>
+                        <div class="chat-bubble ai">
+                            <small>Knova AI</small>
+                            Found a mutual match: <strong>Aarav S.</strong> teaches C++ and is looking for a Figma mentor.
+                        </div>
+                        <div class="chat-bubble calendar">
+                            <div class="cal-icon">⚡</div>
+                            <div>
+                                <div style="font-weight:600; color:#FFFFFF;">Session Proposed</div>
+                                <div style="font-size:0.75rem; color:var(--mut);">Tomorrow, 4:00 PM · 0 pts · Skill Barter</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ticker -->
+            <div class="tick">
+                <div>
+                    Earn points daily <span>•</span> Barter skills, pay ₹0 <span>•</span> Find hackathon teammates <span>•</span> Share notes, earn +25 <span>•</span> Help a peer, earn +20 <span>•</span> Earn points daily <span>•</span> Barter skills, pay ₹0 <span>•</span> Find hackathon teammates <span>•</span> Share notes, earn +25 <span>•</span>
+                </div>
+            </div>
+
+            <!-- Daily Challenge -->
+            <div class="card mb dc">
+                <span class="chip">DAILY CHALLENGE · +50 PTS</span>
+                <h3 style="margin:10px 0 6px">Best average-case time complexity of QuickSort?</h3>
+                <div id="dq"></div>
+            </div>
+
+            <h2 class="t">Verified Senior Mentors</h2>
+            <p class="sub">Book 1-on-1 sessions with Knowledge Points.</p>
+            <div class="g" id="hm"></div>
+
+            <div class="sec">
+                <h2 class="t">Team Finder</h2>
+                <p class="sub">Apply to active hackathon teams.</p>
+                <div class="g" id="hp"></div>
+            </div>
+
+            <div class="sec">
+                <h2 class="t">Campus Events</h2>
+                <p class="sub">Reserve seats for workshops and sprints.</p>
+                <div class="g" id="he"></div>
+            </div>
+
+            <div class="sec">
+                <h2 class="t">Learning Communities</h2>
+                <p class="sub">Join a club — get a confirmation and a hub to chat in.</p>
+                <div class="g" id="hc"></div>
+            </div>
+
+            <div class="sec">
+                <h2 class="t">What LPU Students Say</h2>
+                <p class="sub">Verified reviews from peers.</p>
+                <div class="g" id="hr"></div>
+                <div class="card" style="margin-top:22px">
+                    <h3>Write a review</h3>
+                    <div class="row" style="margin:12px 0">
+                        <select id="rs" style="max-width:150px">
+                            <option value="5">★★★★★</option>
+                            <option value="4">★★★★☆</option>
+                            <option value="3">★★★☆☆</option>
+                            <option value="2">★★☆☆☆</option>
+                            <option value="1">★☆☆☆☆</option>
+                        </select>
+                        <input id="rt" placeholder="Share your experience (min 15 characters)">
+                    </div>
+                    <button class="btn p" onclick="addReview()">Post review</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TUTORS -->
+        <section class="pg" id="p-tutors">
+            <h2 class="t">Find a Peer Tutor</h2>
+            <p class="sub">Search by name or skill.</p>
+            <div class="row mb">
+                <input id="ts" placeholder="Search C++, Python, Figma…" oninput="rTut()" style="flex:2">
+                <select id="tf" onchange="rTut()">
+                    <option value="all">All types</option>
+                    <option value="free">Free</option>
+                    <option value="paid">Paid / points</option>
+                    <option value="barter">Skill barter</option>
+                </select>
+            </div>
+            <div class="g" id="ft"></div>
+        </section>
+
+        <!-- BARTER -->
+        <section class="pg" id="p-barter">
+            <h2 class="t">Skill Barter</h2>
+            <p class="sub">Trade what you teach for what you want to learn.</p>
+            <div class="card mb" id="bp"></div>
+            <h3 class="mb">Mutual matches</h3>
+            <div class="g mb" id="bm"></div>
+            <h3 class="mb">Your requests</h3>
+            <div class="card" id="bt"></div>
+        </section>
+
+        <!-- AI SUITE -->
+        <section class="pg" id="p-ai">
+            <h2 class="t">Knova AI Suite</h2>
+            <p class="sub">Roadmaps, team building and diagnostic quizzes.</p>
+            <div class="card mb">
+                <span class="chip">TOOL 1</span>
+                <h3>Roadmap Generator</h3>
+                <div class="row" style="margin:12px 0">
+                    <input id="ri" maxlength="80" placeholder="e.g. Full-Stack Web Development">
+                    <button class="btn p" onclick="roadmap()">Generate</button>
+                </div>
+                <div id="ro"></div>
+            </div>
+            <div class="card mb">
+                <span class="chip">TOOL 2</span>
+                <h3>Hackathon Team Builder</h3>
+                <div class="row" style="margin:12px 0">
+                    <input id="pi" maxlength="120" placeholder="e.g. Smart campus energy saving system">
+                    <button class="btn p" onclick="teamB()">Build team</button>
+                </div>
+                <div id="po"></div>
+            </div>
+            <div class="card">
+                <span class="chip">TOOL 3</span>
+                <h3>3-Question Diagnostic Quiz</h3>
+                <div class="row" style="margin:12px 0">
+                    <select id="qt">
+                        <option value="dsa">Data Structures & Algorithms</option>
+                        <option value="web">Web Development</option>
+                        <option value="math">Engineering Calculus</option>
+                    </select>
+                    <button class="btn p" onclick="quiz()">Start quiz</button>
+                </div>
+                <div id="qo"></div>
+            </div>
+        </section>
+
+        <!-- DOUBTS -->
+        <section class="pg" id="p-doubts">
+            <h2 class="t">Doubt Corner</h2>
+            <p class="sub">Answer a peer’s question (+20 pts, quality-checked).</p>
+            <div class="card mb">
+                <h3>Ask a doubt</h3>
+                <div class="row" style="margin-top:10px">
+                    <input id="dt" placeholder="e.g. Why do AVL trees guarantee O(log n) lookups?">
+                    <button class="btn p" onclick="ask()">Ask community</button>
+                </div>
+            </div>
+            <div id="df"></div>
+        </section>
+
+        <!-- NOTES -->
+        <section class="pg" id="p-notes">
+            <h2 class="t">Notes Library</h2>
+            <p class="sub">Upload a note (+25 pts, max 1 MB, 3 rewarded uploads a day).</p>
+            <div class="card mb">
+                <div class="row">
+                    <input id="nt" placeholder="Note title">
+                    <input type="file" id="nf">
+                    <button class="btn p" onclick="upNote()">Upload</button>
+                </div>
+            </div>
+            <div class="g" id="nl"></div>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section class="pg" id="p-dashboard">
+            <div id="db"></div>
+        </section>
+
+        <!-- HELP DESK -->
+        <section class="pg" id="p-help">
+            <h2 class="t">Help Desk</h2>
+            <p class="sub">Need assistance? The campus support team typically replies within 24 hours.</p>
+            <div class="g mb">
+                <div class="card">
+                    <div style="font-size:1.3rem; margin-bottom:4px; color:var(--cyan);">✉</div>
+                    <b>Email Support</b>
+                    <p class="mut" style="margin-top:4px;">knova.support@lpu-demo.in</p>
+                </div>
+                <div class="card">
+                    <div style="font-size:1.3rem; margin-bottom:4px; color:var(--cyan);">☎</div>
+                    <b>Campus Helpline</b>
+                    <p class="mut" style="margin-top:4px;">Mon–Sat, 10am–5pm · 01824-000-000</p>
+                </div>
+                <div class="card">
+                    <div style="font-size:1.3rem; margin-bottom:4px; color:var(--cyan);">🏢</div>
+                    <b>In-Person Help</b>
+                    <p class="mut" style="margin-top:4px;">Student Services, Block 32</p>
+                </div>
+            </div>
+            <div class="g" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+                <div class="card">
+                    <h3 class="mb">Raise a Ticket</h3>
+                    <div class="fg">
+                        <label>Category</label>
+                        <select id="hc1">
+                            <option>Points or wallet</option>
+                            <option>Booking problem</option>
+                            <option>Account / login</option>
+                            <option>Notes or files</option>
+                            <option>Report a user</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label>Describe the issue</label>
+                        <textarea id="hm1" rows="4" placeholder="What happened?"></textarea>
+                    </div>
+                    <button class="btn p w" onclick="ticket()">Submit ticket</button>
+                    <div id="tk" style="margin-top:14px"></div>
+                </div>
+                <div>
+                    <h3 class="mb">Frequently Asked Questions</h3>
+                    <details>
+                        <summary>How do I earn points?</summary>
+                        <p class="mut" style="margin-top:8px;">Daily challenge (+50), quizzes (+10/correct), answers (+20), notes (+25), first-time community joins (+10).</p>
+                    </details>
+                    <details>
+                        <summary>Why can’t I book as a tutor?</summary>
+                        <p class="mut" style="margin-top:8px;">Tutor-only accounts teach only. Register as Learner or Both to book sessions.</p>
+                    </details>
+                    <details>
+                        <summary>Why didn't I get points for my answer?</summary>
+                        <p class="mut" style="margin-top:8px;">Answers must be at least 4 words, high quality, and not posted on your own question.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        Knova · Developed for Lovely Professional University · Peer Learning Platform
+    </footer>
+
+    <!-- DOCKED BOTTOM HELP DESK BUTTON (Requested Change) -->
+    <button class="fab" onclick="go('help')" aria-label="Open Help Desk">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+        </svg>
+        Help Desk
+    </button>
+
+    <!-- MODALS & DIALOGS -->
+    <div class="ov" id="m-auth">
+        <div class="md">
+            <button class="x" onclick="cl('m-auth')" aria-label="Close">✕</button>
+            <h3>Join Knova</h3>
+            <div class="tabs" style="margin-top:14px">
+                <button class="btn" id="tl" onclick="tab('l')">Sign In</button>
+                <button class="btn o" id="tr" onclick="tab('r')">New Registration</button>
+            </div>
+            <form id="fl" onsubmit="login(event)" autocomplete="on">
+                <div class="fg">
+                    <label for="le">College email</label>
+                    <input id="le" type="email" placeholder="yourname@lpu.in" required autocomplete="username">
+                </div>
+                <div class="fg">
+                    <label for="lp">Password</label>
+                    <input id="lp" data-pw type="password" placeholder="Your password" required autocomplete="current-password">
+                </div>
+                <label class="mut" style="font-size:0.8rem; cursor:pointer;">
+                    <input type="checkbox" onchange="sp(this)" style="width:auto; vertical-align:middle; margin-right:4px;"> Show password
+                </label>
+                <p class="mut" id="le2" style="color:#F43F5E; font-weight:600; margin:8px 0" role="alert"></p>
+                <button class="btn p w" style="margin-top:10px;">Sign in</button>
+            </form>
+            <form id="fr" style="display:none" onsubmit="reg(event)" autocomplete="off">
+                <div class="fg">
+                    <label for="rn">Full name</label>
+                    <input id="rn" maxlength="40" placeholder="As on your college ID" required>
+                </div>
+                <div class="fg">
+                    <label for="re">LPU email</label>
+                    <input id="re" type="email" placeholder="yourname@lpu.in" required>
+                </div>
+                <div class="fg">
+                    <label for="rp">Password</label>
+                    <input id="rp" data-pw type="password" minlength="8" placeholder="8+ characters, letters and numbers" required autocomplete="new-password">
+                </div>
+                <div class="fg">
+                    <label for="rp2">Confirm password</label>
+                    <input id="rp2" data-pw type="password" placeholder="Type it again" required autocomplete="new-password">
+                </div>
+                <div class="fg">
+                    <label for="rr">Register as</label>
+                    <select id="rr" onchange="roleSync()">
+                        <option value="both">Both (learn & teach)</option>
+                        <option value="tutor">Tutor only (teach & earn)</option>
+                        <option value="learner">Learner only (learn)</option>
+                    </select>
+                </div>
+                <div class="fg">
+                    <label for="rd">School / department</label>
+                    <select id="rd" required>
+                        <option value="" selected disabled>Choose your school</option>
+                        <option>Computer Science & Engineering</option>
+                        <option>Electronics & Electrical</option>
+                        <option>Mechanical & Civil</option>
+                        <option>Design & Architecture</option>
+                        <option>Business & Management</option>
+                        <option>Sciences & Mathematics</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="fg" id="gt">
+                    <label for="rt1">Skills you can teach</label>
+                    <input id="rt1" maxlength="80" data-ph="e.g. Python, C++">
+                </div>
+                <div class="fg" id="gl">
+                    <label for="rl">Skills you want to learn</label>
+                    <input id="rl" maxlength="80" data-ph="e.g. Design Thinking">
+                </div>
+                <button class="btn p w">Create account · get 100 pts</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="ov" id="m-book">
+        <div class="md">
+            <button class="x" onclick="cl('m-book')">✕</button>
+            <h3 id="bk-t">Book session</h3>
+            <p class="mut mb" id="bk-i"></p>
+            <div class="fg">
+                <label>Topic</label>
+                <input id="bk-top" placeholder="e.g. Dynamic Programming">
+            </div>
+            <div class="fg">
+                <label>Date & time</label>
+                <input type="datetime-local" id="bk-when">
+            </div>
+            <div class="fg">
+                <label>Payment</label>
+                <select id="bk-pay"></select>
+            </div>
+            <button class="btn p w" onclick="confirmBook()">Confirm booking</button>
+        </div>
+    </div>
+
+    <div class="ov" id="m-hub">
+        <div class="md">
+            <button class="x" onclick="cl('m-hub')">✕</button>
+            <div id="hub"></div>
+        </div>
+    </div>
+
+    <div class="ov" id="pop" style="z-index:250">
+        <div class="md" id="pop-body" style="text-align:center;"></div>
+    </div>
+
+    <script>
+        const $ = i => document.getElementById(i), 
+              esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])), 
+              today = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') };
+        
+        const LS = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d } catch (e) { return d } }, 
+              SV = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true } catch (e) { setTimeout(() => toast('Storage is full. Remove an uploaded note to save more.'), 0); return false } };
+        
+        const mkU = (o) => Object.assign({ pts: 0, sess: [], apps: [], comms: [], evs: [], log: {} }, o);
+        
+        let DB = LS('knova_v5', null) || {
+            cur: null, users: {},
+            doubts: [
+                { t: 'Why does freeing a null pointer in C++ not cause SIGSEGV?', a: 'Rohan V.', by: '', ans: [{ a: 'Aarav S.', by: '', x: 'The C++ standard defines delete on nullptr as a safe no-op. A crash occurs only when deleting invalid memory.', v: [], u: 12 }] }, 
+                { t: 'Difference between Dijkstra and A* in simple terms?', a: 'Ananya G.', by: '', ans: [{ a: 'Priya S.', by: '', x: 'Dijkstra searches evenly in all directions, while A* uses a distance heuristic to prioritize the destination.', v: [], u: 21 }] }
+            ],
+            notes: [
+                { t: 'Calculus & Vector Formulas (All Units)', u: 'Priya S.', d: 216, f: 'Calculus_Handbook.pdf', k: 'calc' }, 
+                { t: 'Complete Data Structures in C++ Cheat Sheet', u: 'Aarav S.', d: 480, f: 'DSA_CheatSheet.pdf', k: 'dsa' }
+            ],
+            reviews: [
+                { n: 'Amandeep Kaur', b: 'B.Tech CSE', x: 'I used 200 Knowledge Points to book Priya for Calculus before end-terms. Cleared it with an A without paying money!', r: 5 }, 
+                { n: 'Vikram Malhotra', b: 'B.Des Product', x: 'Skill Barter is a game changer. I taught Figma to Aarav and he helped me debug my JavaScript.', r: 5 }, 
+                { n: 'Simran Gill', b: 'B.Tech ECE', x: 'Found two hackathon teammates through the collaboration board in under 24 hours.', r: 5 }
+            ], 
+            tickets: [], barters: [], hub: {}
+        };
+
+        const save = () => SV('knova_v5', DB), U = () => DB.users[DB.cur]; 
+        if (DB.cur && !DB.users[DB.cur]) DB.cur = null;
+
+        const T = [
+            { n: 'Sneha Patel', b: 'B.Des UX (4th Yr)', s: ['Figma', 'UI/UX', 'User Research'], f: 'Skill Barter', ty: 'barter', c: 0, r: 4.9 }, 
+            { n: 'Priya Sundaram', b: 'B.Sc Maths (3rd Yr)', s: ['Calculus III', 'Linear Algebra'], f: '₹200/hr or 200 pts', ty: 'paid', c: 200, r: 4.95 }, 
+            { n: 'Harpreet Singh', b: 'B.Tech ECE (4th Yr)', s: ['IoT', 'Arduino', 'Embedded C'], f: 'Free (volunteer)', ty: 'free', c: 0, r: 4.8 }, 
+            { n: 'Rohan Verma', b: 'B.Tech Mech (2nd Yr)', s: ['AutoCAD', 'Thermodynamics'], f: 'Skill Barter', ty: 'barter', c: 0, r: 5 }, 
+            { n: 'Kavita Rao', b: 'B.Tech CSE (4th Yr)', s: ['Python', 'Machine Learning', 'PyTorch'], f: '₹250/hr or 250 pts', ty: 'paid', c: 250, r: 4.9 }, 
+            { n: 'Aarav Sharma', b: 'B.Tech CSE (3rd Yr)', s: ['C++', 'DSA', 'Competitive Coding'], f: '₹150/hr or 150 pts', ty: 'paid', c: 150, r: 4.9 }
+        ];
+
+        const PR = [
+            { t: 'Smart Campus Autonomous Drone', l: 'Harpreet Singh', r: ['Computer Vision', 'Embedded C', 'UI Dashboard'], d: 'Nov 25, 2026' }, 
+            { t: 'AI-Powered Course Recommender', l: 'Aarav Sharma', r: ['Frontend', 'FastAPI', 'Data Analyst'], d: 'Dec 05, 2026' }, 
+            { t: 'LPU Campus Marketplace App', l: 'Sneha Patel', r: ['Figma Designer', 'Flutter Developer'], d: 'Nov 30, 2026' }
+        ];
+
+        const EV = [
+            { t: '48-Hour Web3 Campus Hackathon', d: 'Nov 14-16, 2026', ty: 'Competition', x: 'Build decentralized tools for students. ₹50,000 in bounties.' }, 
+            { t: 'Mastering Figma & UI Systems Workshop', d: 'Nov 18, 2026', ty: 'Workshop', x: 'Build scalable design components with senior UX students.' }
+        ];
+
+        const CO = [
+            { n: 'C++ & Competitive Programmers', c: 420, i: '💻', x: 'Weekly contest nights and DSA doubt threads.' }, 
+            { n: 'Full-Stack Web Developers', c: 680, i: '🌐', x: 'Project showcases, code reviews and stack talk.' }, 
+            { n: 'UI/UX & Product Designers', c: 310, i: '🎨', x: 'Figma critiques and design challenges.' }, 
+            { n: 'AI & Machine Learning Club', c: 540, i: '🤖', x: 'Paper reading and Kaggle team-ups.' }
+        ];
+
+        const QZ = { 
+            dsa: [['Which data structure does BFS use?', ['Stack', 'Queue', 'Hash Map'], 1], ['Average-case search in a balanced BST?', ['O(n)', 'O(log n)', 'O(1)'], 1], ['Which sort is stable?', ['Merge sort', 'Quick sort', 'Heap sort'], 0]], 
+            web: [['Which keyword declares a block-scoped variable?', ['var', 'let', 'def'], 1], ['CSS property for flex layout?', ['display', 'float', 'position'], 0], ['What does JSON.parse do?', ['String → object', 'Object → string', 'Sorts keys'], 0]], 
+            math: [['Derivative of sin(x)?', ['cos x', '−cos x', 'tan x'], 0], ['∫ 2x dx =', ['x²+C', '2x²+C', 'x+C'], 0], ['Gradient of a scalar field is a…', ['Scalar', 'Vector', 'Matrix'], 1]] 
+        };
+
+        const COL = ['#38BDF8', '#34D399', '#818CF8', '#FB7185', '#FBBF24']; 
+        const RK = [[0, 'Rookie'], [200, 'Scholar'], [500, 'Ace'], [1000, 'Sensei']];
+        const ft = s => { const d = new Date(String(s).replace(' ', 'T')); return isNaN(d) ? s : d.toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) };
+        
+        let cur = 'home', bkIdx = -1;
+
+        function go(p) { 
+            cur = p; 
+            document.querySelectorAll('.pg').forEach(e => e.classList.toggle('on', e.id == 'p-' + p)); 
+            document.querySelectorAll('.links button').forEach(b => b.classList.toggle('on', b.dataset.p == p)); 
+            scrollTo(0, 0); 
+            if (p == 'dashboard') rDash(); 
+            if (p == 'barter') rBart(); 
+            if (p == 'help') rTk(); 
+        }
+
+        $('links').innerHTML = [
+            ['home', 'Home'], 
+            ['tutors', 'Find Tutors'], 
+            ['barter', 'Skill Barter'], 
+            ['ai', 'AI Tools'], 
+            ['doubts', 'Doubt Corner'], 
+            ['notes', 'Notes'], 
+            ['dashboard', 'Dashboard'], 
+            ['help', 'Help Desk']
+        ].map(a => `<button data-p="${a[0]}" onclick="go('${a[0]}')" class="${a[0] == 'home' ? 'on' : ''}">${a[1]}</button>`).join('');
+
+        const op = i => $(i).classList.add('on'), cl = i => $(i).classList.remove('on');
+
+        function pop(ic, t, m, b) { 
+            $('pop-body').innerHTML = `<div style="font-size:2rem;margin-bottom:8px">${ic || 'ℹ'}</div><h3>${t}</h3><p style="color:var(--mut);margin:8px 0 18px">${m}</p><div class="row" style="justify-content:center"></div>`; 
+            (b || [{ t: 'Got it' }]).forEach(x => { 
+                const e = document.createElement('button'); 
+                e.className = 'btn ' + (x.c || 'p'); 
+                e.textContent = x.t; 
+                e.onclick = () => { cl('pop'); x.f && x.f() }; 
+                $('pop-body').querySelector('.row').appendChild(e) 
+            }); 
+            op('pop');
+        }
+
+        function toast(m) { 
+            const e = document.createElement('div'); 
+            e.className = 'ts'; 
+            e.textContent = m; 
+            $('toasts').appendChild(e); 
+            setTimeout(() => e.remove(), 3200); 
+        }
+
+        function addPts(n, why) { U().pts += n; save(); upd(); toast(`+${n} pts · ${why}`) }
+        function need() { if (!DB.cur) { pop('🔒', 'Sign in first', 'Create an account or sign in to continue.', [{ t: 'Sign In', f: () => { tab('l'); op('m-auth') } }, { t: 'Later', c: 'o' }]); return false } return true }
+        function upd() { $('np').textContent = DB.cur ? U().pts : 0; $('ab').textContent = DB.cur ? U().name.split(' ')[0] : 'Sign In' }
+        const rl = r => r == 'learner' ? 'STUDENT' : r.toUpperCase();
+
+        function authBtn() { 
+            if (!DB.cur) { 
+                tab('l'); 
+                op('m-auth'); 
+            } else {
+                pop('👤', 'Account: ' + esc(U().name), 'Signed in as ' + esc(U().email), [
+                    { t: 'Dashboard', f: () => go('dashboard') }, 
+                    { t: 'Sign out', c: 'o', f: () => { DB.cur = null; save(); upd(); rAll(); go('home'); toast('Signed out') } }
+                ]);
+            }
+        }
+
+        function tab(t) { $('fl').style.display = t == 'l' ? 'block' : 'none'; $('fr').style.display = t == 'r' ? 'block' : 'none'; $('tl').className = 'btn' + (t == 'l' ? '' : ' o'); $('tr').className = 'btn' + (t == 'r' ? '' : ' o'); roleSync() }
+        function roleSync() { const r = $('rr').value; [['rt1', r == 'learner'], ['rl', r == 'tutor']].forEach(([i, off]) => { const e = $(i); e.disabled = off; e.required = !off; if (off) e.value = ''; e.placeholder = off ? 'Not available for this role' : e.dataset.ph; e.closest('.fg').classList.toggle('off', off) }) }
+        function enter(email, msg) { DB.cur = email; save(); cl('m-auth'); upd(); rAll(); pop('🎉', msg[0], msg[1], [{ t: 'Open dashboard', f: () => go('dashboard') }]) }
+
+        const hx = async (p, s) => { const b = new TextEncoder().encode(s + ':' + p); if (!(window.crypto && crypto.subtle)) return btoa(unescape(encodeURIComponent(s + p))); return [...new Uint8Array(await crypto.subtle.digest('SHA-256', b))].map(x => x.toString(16).padStart(2, '0')).join('') }, rs = () => Array.from(crypto.getRandomValues(new Uint8Array(8)), x => x.toString(16).padStart(2, '0')).join('');
+        let fails = 0, lockT = 0; const sp = c => c.closest('form').querySelectorAll('input[data-pw]').forEach(i => i.type = c.checked ? 'text' : 'password');
+        function bad(m) { $('le2').textContent = m }
+
+        async function login(e) { 
+            e.preventDefault(); 
+            if (Date.now() < lockT) return bad('Locked out. Try in ' + Math.ceil((lockT - Date.now()) / 1000) + 's.'); 
+            const u = DB.users[$('le').value.trim().toLowerCase()]; 
+            if (!u || u.h !== await hx($('lp').value, u.s)) { 
+                if (++fails >= 5) { fails = 0; lockT = Date.now() + 60000; return bad('Too many attempts. Locked for 60 seconds.') } 
+                return bad('Wrong email or password.') 
+            } 
+            fails = 0; $('le2').textContent = ''; e.target.reset(); enter(u.email, ['Welcome back, ' + esc(u.name.split(' ')[0]), 'You’re successfully signed in.']);
+        }
+
+        async function reg(e) {
+            e.preventDefault(); const f = e.target, em = $('re').value.trim().toLowerCase(), nm = $('rn').value.trim().replace(/\s+/g, ' '), pw = $('rp').value, r = $('rr').value;
+            if (!/^[A-Za-z][A-Za-z .'-]{1,38}$/.test(nm)) return pop('⚠️', 'Check your name', 'Use 2–40 letters without numbers or symbols.');
+            if (T.some(t => t.n.toLowerCase() == nm.toLowerCase())) return pop('⚠️', 'Name reserved', 'This matches a verified tutor. Please use your full name.');
+            if (!/^[^\s@]+@lpu\.in$/.test(em)) return pop('⚠️', 'Campus email required', 'Please sign up with your valid @lpu.in address.');
+            if (DB.users[em]) return pop('⚠️', 'Already registered', 'This email is already in use. Please sign in.', [{ t: 'Go to sign in', f: () => tab('l') }]);
+            if (pw.length < 8 || !/[A-Za-z]/.test(pw) || !/\d/.test(pw)) return pop('⚠️', 'Weak password', 'Use 8+ characters with both letters & numbers.');
+            if (pw !== $('rp2').value) return pop('⚠️', 'Mismatch', 'Passwords do not match.');
+            const s = rs(); DB.users[em] = mkU({ name: nm, email: em, h: await hx(pw, s), s, role: r, college: 'LPU · ' + $('rd').value, teach: r == 'learner' ? '' : $('rt1').value.trim(), learn: r == 'tutor' ? '' : $('rl').value.trim(), pts: 100 }); 
+            f.reset(); roleSync(); enter(em, ['Welcome to Knova, ' + esc(nm.split(' ')[0]) + '!', 'Your account has been created and 100 Knowledge Points were added to your wallet.']);
+        }
+
+        function daily() { const d = DB.cur && U().log.daily == today(); $('dq').innerHTML = d ? '<p style="color:var(--mint);font-weight:600">✓ Completed today! Check back tomorrow for +50 pts.</p>' : ['O(n²)', 'O(n log n)', 'O(1)'].map((o, i) => `<button class="btn s" style="margin:6px 6px 0 0" onclick="dAns(${i})">${'ABC'[i]}) ${o}</button>`).join('') }
+        function dAns(i) { if (!need()) return; if (U().log.daily == today()) return; if (i != 1) return pop('❌', 'Incorrect', 'Review QuickSort partitions in the Notes library and try again.'); U().log.daily = today(); addPts(50, 'Daily Challenge'); daily() }
+        function chips(a) { return a.map(s => `<span class="chip">${esc(s)}</span>`).join('') }
+        
+        function tCard(t, i) { 
+            return `<div class="card">
+                <div class="av" style="background:${COL[i % 5]}">${t.n.split(' ').map(w => w[0]).join('')}</div>
+                <h3 style="font-size:1.1rem">${t.n}</h3>
+                <p class="mut" style="font-size:0.85rem">${t.b} · ★ ${t.r}</p>
+                <div style="margin:10px 0">${chips(t.s)}</div>
+                <p style="font-size:0.92rem;margin-top:auto"><b>${t.f}</b></p>
+                <button class="btn p w" style="margin-top:14px" onclick="book(${i})">Book session</button>
+            </div>`; 
+        }
+
+        function rTut() { const q = $('ts').value.toLowerCase(), f = $('tf').value; $('ft').innerHTML = T.map((t, i) => [t, i]).filter(([t]) => (f == 'all' || t.ty == f) && (t.n + t.s.join()).toLowerCase().includes(q)).map(([t, i]) => tCard(t, i)).join('') || '<p class="mut">No mentors found.</p>' }
+        function book(i) { if (!need()) return; const u = U(), t = T[i]; if (u.role == 'tutor') return pop('⚠️', 'Role restriction', 'Tutor-only accounts cannot book sessions. Register as "Both" to learn.'); if (u.name == t.n) return pop('⚠️', 'Self-booking', 'You cannot book yourself.'); bkIdx = i; $('bk-t').textContent = 'Book ' + t.n; $('bk-i').textContent = t.f; $('bk-pay').innerHTML = t.c ? `<option value="pts">Redeem ${t.c} points (₹0)</option><option value="cash">Direct UPI / Cash</option>` : `<option value="free">${t.ty == 'free' ? 'Free Session' : 'Skill Barter (No cost)'}</option>`; op('m-book') }
+        
+        function confirmBook() { 
+            const t = T[bkIdx], u = U(), top = $('bk-top').value.trim(), w = $('bk-when').value, p = $('bk-pay').value; 
+            if (top.length < 3 || !w) return toast('Please specify a topic and valid time'); 
+            if (new Date(w) < new Date()) return toast('Select a future time'); 
+            if (u.sess.some(s => s.time == w.replace('T', ' '))) return toast('You already have a session booked then'); 
+            if (p == 'pts') { if (u.pts < t.c) return pop('⚠️', 'Insufficient Points', 'You need ' + t.c + ' points. Complete quizzes or answer community doubts to earn more.'); u.pts -= t.c } 
+            u.sess.push({ topic: top, tutor: t.n, time: w.replace('T', ' '), paid: p, pts: p == 'pts' ? t.c : 0 }); 
+            save(); upd(); cl('m-book'); $('bk-top').value = ''; 
+            pop('📅', 'Session Confirmed', 'Topic: <b>' + esc(top) + '</b> with ' + t.n + '<br>Find details under Dashboard → Bookings.', [{ t: 'View schedule', f: () => go('dashboard') }]) 
+        }
+
+        function rHome() {
+            $('hm').innerHTML = T.slice(0, 3).map((t, i) => tCard(t, i)).join(''); 
+            const u = DB.cur ? U() : null;
+            $('hp').innerHTML = PR.map((p, i) => { const a = u && u.apps.includes(p.t); return `<div class="card"><span class="chip">TEAM OPENING</span><h3 style="margin:8px 0;font-size:1.1rem">${p.t}</h3><p class="mut" style="font-size:0.85rem">Lead: ${p.l} · Due: ${p.d}</p><div style="margin:10px 0">${chips(p.r)}</div><button class="btn ${a ? 's' : 'p'} w" ${a ? 'disabled' : ''} onclick="apply(${i})">${a ? '✓ Applied' : 'Apply for Team'}</button></div>` }).join('');
+            $('he').innerHTML = EV.map((e, i) => { const a = u && u.evs.includes(e.t); return `<div class="card"><span class="chip">${e.ty}</span><h3 style="margin:8px 0;font-size:1.1rem">${e.t}</h3><p style="color:var(--cyan);font-weight:600;font-size:0.88rem">${e.d}</p><p class="mut" style="margin:6px 0 14px;font-size:0.88rem">${e.x}</p><button class="btn ${a ? 's' : 'p'} w" ${a ? 'disabled' : ''} onclick="regEv(${i})">${a ? '✓ Ticket Reserved' : 'Reserve Spot'}</button></div>` }).join('');
+            $('hc').innerHTML = CO.map((c, i) => { const j = u && u.comms.includes(c.n); return `<div class="card" style="text-align:center"><div style="font-size:2rem;margin-bottom:8px">${c.i}</div><h3 style="font-size:1.1rem">${c.n}</h3><p class="mut" style="margin:4px 0 14px;font-size:0.85rem">${c.c + (j ? 1 : 0)} active members</p>${j ? `<button class="btn s w" onclick="hub(${i})">Open Hub →</button>` : `<button class="btn p w" onclick="join(${i})">Join Club</button>`}</div>` }).join('');
+            $('hr').innerHTML = DB.reviews.map(r => `<div class="card"><div style="color:#FBBF24;margin-bottom:6px">${'★'.repeat(r.r)}${'☆'.repeat(5 - r.r)}</div><p style="margin:6px 0 10px;font-size:0.92rem">“${esc(r.x)}”</p><b>${esc(r.n)}</b><div class="mut" style="font-size:0.8rem">${esc(r.b)} · Verified Student</div></div>`).join(''); 
+            daily();
+        }
+
+        function apply(i) { if (!need()) return; const u = U(); if (u.apps.includes(PR[i].t)) return toast('Already applied'); u.apps.push(PR[i].t); save(); rHome(); toast('Application sent for ' + PR[i].t) }
+        function regEv(i) { if (!need()) return; if (U().evs.includes(EV[i].t)) return toast('You already have a pass'); U().evs.push(EV[i].t); save(); rHome(); pop('🎟', 'Ticket Confirmed', 'You have reserved a pass for <b>' + EV[i].t + '</b>.') }
+        function join(i) { if (!need()) return; const u = U(), c = CO[i]; u.comms.push(c.n); const k = 'join' + i; if (!u.log[k]) { u.log[k] = 1; u.pts += 10 } save(); upd(); rHome(); toast('Joined ' + c.n) }
+        function hub(i) { const c = CO[i], p = DB.hub[c.n] || []; $('hub').innerHTML = `<h3>${c.i} ${c.n}</h3><p class="mut" style="margin-bottom:12px">${c.x}</p><div class="ans"><b>Welcome:</b> Share resources and be polite!</div>${p.map(m => `<div class="ans"><b>${esc(m.n)}</b>: ${esc(m.x)}</div>`).join('')}<div class="row" style="margin-top:14px;flex-wrap:nowrap"><input id="hi" placeholder="Post message to hub…"><button class="btn p" onclick="hpost(${i})">Send</button></div>`; op('m-hub') }
+        function hpost(i) { const x = $('hi').value.trim(); if (x.length < 2) return; (DB.hub[CO[i].n] = DB.hub[CO[i].n] || []).push({ n: U().name, x }); save(); hub(i) }
+        
+        function addReview() { if (!need()) return; const x = $('rt').value.trim(); if (x.length < 15) return toast('Review must be at least 15 characters'); if (DB.reviews.some(r => r.e == DB.cur)) return toast('You already reviewed'); DB.reviews.unshift({ e: DB.cur, n: U().name, b: rl(U().role).toLowerCase() + ' · LPU', x, r: +$('rs').value }); save(); $('rt').value = ''; rHome(); toast('Review posted!') }
+        
+        function rBart() {
+            const u = DB.cur ? U() : null; if (!u) { $('bp').innerHTML = '<b>Sign in to see your skill barter profile.</b>'; $('bm').innerHTML = $('bt').innerHTML = ''; return }
+            $('bp').innerHTML = `<b>You teach:</b> ${esc(u.teach || 'None specified')}<br><b>You want to learn:</b> ${esc(u.learn || 'None specified')}`;
+            $('bm').innerHTML = T.filter(t => t.ty == 'barter').map(t => `<div class="card"><h3>${t.n}</h3><p class="mut">Offers: ${t.s.join(', ')}</p><button class="btn p w" style="margin-top:12px" onclick="barter('${t.n}')">Send Barter Request</button></div>`).join('');
+            const m = DB.barters.filter(b => b.by == u.email); $('bt').innerHTML = m.map(b => `<p>To <b>${b.to}</b> · <span class="chip">${b.st}</span></p>`).join('') || '<p class="mut">No outgoing barter requests yet.</p>';
+        }
+
+        function barter(n) { if (DB.barters.some(b => b.by == DB.cur && b.to == n)) return toast('Request already active'); DB.barters.push({ by: DB.cur, to: n, st: 'Pending' }); save(); rBart(); toast('Barter invite sent to ' + n) }
+
+        function roadmap() { const v = $('ri').value.trim(); if (v.length < 3) return toast('Enter a valid career or skill path'); $('ro').innerHTML = ['Step 1: Foundations & Core Concepts', 'Step 2: Hands-on Projects & Exercises', 'Step 3: Advanced Architectures & Production', 'Step 4: Portfolio Review & Peer Barter'].map((s, i) => `<div class="ans"><b>Phase ${i + 1}:</b> ${s} of ${esc(v)}</div>`).join('') }
+        function teamB() { const p = $('pi').value.toLowerCase().trim(); if (p.length < 4) return toast('Describe project idea first'); const m = T.slice(0, 3); $('po').innerHTML = m.map(t => `<div class="ans">Recommended: <b>${t.n}</b> · Skills: ${t.s.join(', ')}</div>`).join('') }
+
+        let Q = null; 
+        function quiz() { if (!need()) return; Q = { t: $('qt').value, i: 0, s: 0 }; rq() }
+        function rq() { const q = QZ[Q.t][Q.i]; $('qo').innerHTML = `<p style="margin:10px 0"><b>Question ${Q.i + 1}/3:</b> ${q[0]}</p>` + q[1].map((o, j) => `<button class="btn s" style="display:block;width:100%;text-align:left;margin-bottom:8px" onclick="qa(${j})">${'ABC'[j]}) ${o}</button>`).join('') }
+        function qa(j) { if (j == QZ[Q.t][Q.i][2]) Q.s++; Q.i++; if (Q.i < 3) return rq(); $('qo').innerHTML = `<p><b>Completed!</b> You scored ${Q.s}/3.</p>`; if (Q.s > 0) addPts(Q.s * 10, 'Quiz completed') }
+
+        function ask() { if (!need()) return; const t = $('dt').value.trim(); if (t.length < 10) return toast('Question must be at least 10 characters'); DB.doubts.unshift({ t, a: U().name, by: U().email, ans: [] }); save(); $('dt').value = ''; rD(); toast('Doubt posted to community') }
+        function reply(i) { const x = $('da' + i).value.trim(); if (!need()) return; if (x.length < 8) return toast('Write a detailed explanation'); DB.doubts[i].ans.push({ a: U().name, by: U().email, x, u: 0 }); addPts(20, 'Helping a peer'); save(); rD() }
+        function rD() { $('df').innerHTML = DB.doubts.map((d, i) => `<div class="card mb"><h3 style="font-size:1.1rem">${esc(d.t)}</h3><p class="mut" style="font-size:0.8rem">Asked by ${esc(d.a)}</p>${d.ans.map(a => `<div class="ans"><b>${esc(a.a)}</b>: ${esc(a.x)}</div>`).join('')}<div class="row" style="margin-top:12px;flex-wrap:nowrap"><input id="da${i}" placeholder="Write an answer (+20 pts)…"><button class="btn p" onclick="reply(${i})">Submit</button></div></div>`).join('') }
+
+        function rN() { $('nl').innerHTML = DB.notes.map((n, i) => `<div class="card"><span class="chip">PDF NOTE</span><h3 style="margin:8px 0;font-size:1.05rem">${esc(n.t)}</h3><p class="mut" style="font-size:0.85rem">By ${esc(n.u)} · ⬇ ${n.d} downloads</p><button class="btn s w" style="margin-top:10px" onclick="toast('Downloading note...')">Download PDF</button></div>`).join('') }
+        function upNote() { if (!need()) return; const t = $('nt').value.trim(); if (t.length < 4) return toast('Add a descriptive note title'); DB.notes.unshift({ t, u: U().name, d: 0, f: 'Notes.pdf' }); addPts(25, 'Note uploaded'); save(); rN(); $('nt').value = '' }
+
+        function ticket() { if (!need()) return; const m = $('hm1').value.trim(); if (m.length < 10) return toast('Describe the problem with more detail'); const id = 'KN-' + (1000 + DB.tickets.length + 1); DB.tickets.unshift({ id, by: DB.cur, c: $('hc1').value, m, st: 'In Review' }); save(); $('hm1').value = ''; rTk(); pop('🎫', 'Ticket Created', 'Ticket <b>' + id + '</b> submitted. Support will reply to ' + esc(U().email) + '.') }
+        function rTk() { $('tk').innerHTML = DB.tickets.filter(t => t.by == DB.cur).map(t => `<p style="font-size:0.88rem;margin-top:6px"><b>${t.id}</b> · ${esc(t.c)} <span class="chip">${t.st}</span></p>`).join('') }
+
+        function rDash() {
+            if (!DB.cur) { $('db').innerHTML = '<div class="card"><h2 class="t">Your Dashboard</h2><p class="sub">Sign in to track points and bookings.</p><button class="btn p" onclick="authBtn()">Sign In</button></div>'; return }
+            const u = U();
+            $('db').innerHTML = `<div class="row mb" style="justify-content:space-between;align-items:center">
+                <div><h2 class="t">${esc(u.name)}</h2><p class="sub" style="margin:0">${esc(u.college)}</p></div>
+                <span class="chip">ROLE: ${rl(u.role)}</span>
+            </div>
+            <div class="g mb">
+                <div class="card"><span class="mut">Points Balance</span><div style="font-size:2.2rem;font-weight:700;color:var(--cyan);margin-top:4px">${u.pts}</div></div>
+                <div class="card"><span class="mut">Joined Communities</span><div style="font-size:2.2rem;font-weight:700;color:var(--mint);margin-top:4px">${u.comms.length}</div></div>
+                <div class="card"><span class="mut">Active Bookings</span><div style="font-size:2.2rem;font-weight:700;color:#F1F5F9;margin-top:4px">${u.sess.length}</div></div>
+            </div>
+            <div class="card mb"><h3 class="mb">Booked Sessions</h3>${u.sess.length ? u.sess.map(s => `<p style="margin-bottom:8px"><b>${esc(s.topic)}</b> with ${s.tutor} · ${esc(ft(s.time))}</p>`).join('') : '<p class="mut">No sessions booked yet.</p>'}</div>`;
+        }
+
+        function rAll() { rHome(); rTut(); rD(); rN(); if (cur == 'dashboard') rDash(); if (cur == 'barter') rBart() }
+
+        // Dynamic Rotating Headline Words
+        const W = ['Barter', 'Learn', 'Teach', 'Succeed']; 
+        let wi = 0; 
+        setInterval(() => { 
+            const e = $('rot'); 
+            if (!e) return;
+            wi = (wi + 1) % W.length; 
+            e.textContent = W[wi]; 
+        }, 2200);
+
+        document.addEventListener('keydown', e => { if (e.key == 'Escape') document.querySelectorAll('.ov.on').forEach(o => o.classList.remove('on')) });
+        document.querySelectorAll('.ov').forEach(o => o.addEventListener('mousedown', e => { if (e.target === o) o.classList.remove('on') }));
+
+        roleSync(); 
+        upd(); 
+        rAll();
+    </script>
+</body>
+
+</html>
